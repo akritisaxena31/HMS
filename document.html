@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <script>
+         var person = {"name": "billy", "age":23};
+         localStorage.setItem('person' , JSON.stringify(person));
+         var retrievedPerson = JSON.parse(localStorage.getItem('person'));
+         console.log(localStorage.getItem('person'));
+         var employee = {"name": "John", "place": "Bangalore"};
+         sessionStorage.setItem('employee', JSON.stringify(employee));
+         var retrievedemployee = JSON.parse(sessionStorage.getItem('employee'));
+         console.log(sessionStorage.getItem(employee));
+
+         function WriteCookie()
+            {
+               if( document.myform.customer.value == "" ) {
+                  alert("Enter some value!");
+                  return;
+               }
+               cookievalue = escape(document.myform.customer.value) + ";";
+               document.cookie="name=" + cookievalue;
+               document.write ("Setting Cookies : " + "name=" + cookievalue );
+            }
+            function ReadCookie()
+            {
+               var allcookies = document.cookie;
+               document.write ("All Cookies : " + allcookies );
+               
+               // Get all the cookies pairs in an array
+               cookiearray = allcookies.split(';');
+               
+               // Now take key value pair out of this array
+               for(var i=0; i<cookiearray.length; i++) {
+                  name = cookiearray[i].split('=')[0];
+                  value = cookiearray[i].split('=')[1];
+                  document.write ("Key is : " + name + " and Value is : " + value);
+               }
+               function DeleteCookie() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("==1");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+    
+    
+    }
+function show()
+        {
+            var value=document.getElementById("demo").value;
+            if(value!="Select Color")
+            {
+                document.bgColor=value;
+                document.cookie="color="+value+";expires=Fri,2 Feb 2022 01:00:00 UTC;";
+            }
+        }
+        window.onload=function()
+        {
+            if(document.cookie.length!=0)
+            {
+                var a=document.cookie.split("=");
+                document.getElementById("demo").value=a[1];
+                document.bgColor=a[1];
+            }
+        }
+            
+        </script>
+        <body>
+     <form name = "myform" action = "">
+        <p> click the following button and see the result:</p>
+        Enter name: <input type = "text" name = "customer"/>
+        <input type = "button" value = "Set Cookie" onclick = "WriteCookie();"/>
+        <input type = "button" value = "Get Cookie" onclick = "ReadCookie()"/>
+        <input type = "button" value = "Clear Cookie" onclick = "DeleteCookie()"/>
+</button>
+<select id="demo" onchange="show()">
+   <option value="Select Color">Select Color</option>
+   <option value="red">Red</option>
+   <option value="green">Green</option>
+   <option value="blue">Blue</option>
+   </select>
+     </form>
+          </body>
